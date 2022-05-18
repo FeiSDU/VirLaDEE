@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Zinnia.Action;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public Vector2Action moveInput;
+    
     public Rigidbody player; //variable refers to Transfom in the scene
     //public float speed = 1f;
     public float forceMultiplier = 10f;
@@ -18,11 +24,11 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDirection = Vector3.zero;
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        moveDirection += new Vector3(x:horizontalInput, y:0f, z:0f);
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        moveDirection += new Vector3(moveInput.Value.x, 0f, 0f);
 
-        float verticalInput = Input.GetAxis("Vertical");
-        moveDirection += new Vector3(x: 0f, y: 0f, z: verticalInput);
+        //float verticalInput = Input.GetAxis("Vertical");
+        moveDirection += new Vector3(0f, 0f, moveInput.Value.y);
         //Vector3 moveDelta = moveDirection * speed * Time.deltaTime;
 
         Vector3 movingForce = moveDirection * forceMultiplier;
